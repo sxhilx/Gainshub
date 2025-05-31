@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js"
 import workoutRoutes from "./routes/workoutRoutes.js"
 import prRoutes from "./routes/prRoutes.js"
 import { notFound } from "./middlewares/notFound.js";
+import { authMiddleware } from "./middlewares/auth.js";
 
 dotenv.config();
 
@@ -18,8 +19,8 @@ app.use(cors());
 
 // Routes
 app.use('/auth', authRoutes)
-app.use('/workouts', workoutRoutes)
-app.use('/pr', prRoutes)
+app.use('/workouts', authMiddleware, workoutRoutes)
+app.use('/pr', authMiddleware, prRoutes)
 
 // Error handling middleware
 app.use(notFound)
