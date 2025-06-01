@@ -47,5 +47,5 @@ export const deletePrService = async (prId, userId) => {
         throw new BadRequestError("PR not found");
     }
 
-    return result.rows[0];
+    return "PR deleted successfully";
 }
