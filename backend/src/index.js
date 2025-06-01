@@ -7,6 +7,8 @@ import workoutRoutes from "./routes/workoutRoutes.js"
 import prRoutes from "./routes/prRoutes.js"
 import { notFound } from "./middlewares/notFound.js";
 import { authMiddleware } from "./middlewares/auth.js";
+import { createAllTables } from "./data/createAllTables.js";
+
 
 dotenv.config();
 
@@ -18,12 +20,16 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-app.use('/auth', authRoutes)
-app.use('/workouts', authMiddleware, workoutRoutes)
-app.use('/pr', authMiddleware, prRoutes)
+app.use('/api/v1/auth', authRoutes)
+app.use('/api/v1/workouts', authMiddleware, workoutRoutes)
+app.use('/api/v1/pr', authMiddleware, prRoutes)
 
 // Error handling middleware
 app.use(notFound)
+
+
+// Create all the tables
+createAllTables();
 
 
 // test route

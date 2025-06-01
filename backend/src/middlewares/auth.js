@@ -11,8 +11,10 @@ export const authMiddleware = async (req, res, next) => {
     const token = authHeader.split(' ')[1] // after spliting looking for the second value (the token)
 
     try {
-        const decode = verifyToken(token)
-        const {userId, name} = decode
+        const decode = await verifyToken(token)
+        
+        const { userId, name } = decode
+        
         req.user = {userId, name} // access userId on all routes with this middleware
         next() // Allows express to move to the next middleware. 
 
