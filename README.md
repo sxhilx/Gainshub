@@ -4,7 +4,7 @@
 
 ### Project Initialization
 - Created the initial project folder structure
-- Initial Setup of the index.js file 
+- Initial Setup of the `index.js` file 
 - Spun up the docker porstgreSQL container to start the database server environment
 
 ### Database Set-up
@@ -17,13 +17,32 @@
     - Auth, Workouts and PRs
 - Implemented initial contoller function for each route.
 
-### Custom erros Set up
-- Set up a custom error class which extends from the error class.
-- Set up Bad request, Not found and Unauthenticated error extending from the custom erros class.
+### Custom Errors Setup
+- Created a base `CustomError` class extending from the native `Error` class.
+- Implemented specific error types:  
+  - `BadRequestError`  
+  - `NotFoundError`  
+  - `UnauthenticatedError`  
+- Enables consistent and descriptive error handling across the application.
 
-### JWT & Password hashing
-- Set up the jwt create token and verify token functions to assing each user with a unique token.
-- Password hashing function set up before storing the password into the database.
+### JWT & Password Hashing
+- Implemented `createToken` and `verifyToken` utility functions using JWT to assign each user a secure, unique token.
+- Integrated password hashing using bcrypt before storing passwords in the database for enhanced security.
 
-### Auth middleware
-- Authentication middleware set up on workouts and prs route to make sure each user is authenticated before accesing these routes.
+### Authentication Middleware
+- Developed a middleware that validates JWTs.
+- This middleware extracts the token from headers and verifies it.
+- Applied this middleware to the `/workouts` and `/pr` routes to restrict access to authenticated users only.
+
+### Database Table Creation
+- Created `users`, `workouts`, and `prs` tables.
+- Both `workouts` and `prs` tables include `user_id` as a foreign key.
+- Centralized all table creation logic in a single `createAllTables` file for clarity and maintainability.
+
+### Models & Business Logic
+- Developed model services for core features (`auth`, `workouts`, `prs`).
+- Separated business logic from controller logic to follow clean architecture principles and ensure code scalability.
+
+### Controllers Integration
+- Connected all controllers with their respective model services.
+- Maintained a clean, modular, and easy-to-maintain codebase by following to the MVC design pattern.
