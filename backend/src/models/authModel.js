@@ -63,3 +63,21 @@ export const verifyEmailService = async(token) => {
     
 }
 
+export const resendVerificationToken = async (email) => {
+    const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
+    const user = result.rows[0]
+
+    if(!user){
+        throw new BadRequestError("Email not found")
+    }
+
+    if(user.is_verified){
+        throw new BadRequestError("Email Already Verified")
+    }
+
+   const emailToken = createEmailToken({userId: user.id}) 
+   await sendVerificationEmail(email, emailToken)
+   return "Verification Email Sent"
+   
+}
+

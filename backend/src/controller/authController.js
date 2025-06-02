@@ -21,3 +21,9 @@ export const verifyEmail = async(req, res) => {
 
     res.status(StatusCodes.OK).send(verify)
 }
+
+export const resendVerificationToken = async (req, res) => {
+    const {email} = req.body;
+    const resend = resendVerificationToken(email);
+    res.StatusCodes(StatusCodes.OK).send(resend)
+}

@@ -9,6 +9,8 @@ import { notFound } from "./middlewares/notFound.js";
 import { authMiddleware } from "./middlewares/auth.js";
 import { createAllTables } from "./data/createAllTables.js";
 import { verifyEmailMiddleware } from "./middlewares/verifyEmailMiddleware.js";
+import rateLimiter from "express-rate-limit"
+import { errorHandlerMiddleware } from "./middlewares/errorHandlerMiddleware.js";
 
 
 dotenv.config();
@@ -19,6 +21,11 @@ const port = process.env.PORT || 3000
 // Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(rateLimiter({
+    windowMs: 15*60*1000,
+    limit: 100,
+    message: 'Too many auth requests from this IP. Try again later.'
+}))
 
 // Routes
 app.use('/api/v1/auth', authRoutes)
@@ -26,6 +33,7 @@ app.use('/api/v1/workouts', authMiddleware, verifyEmailMiddleware, workoutRoutes
 app.use('/api/v1/pr', authMiddleware, verifyEmailMiddleware, prRoutes)
 
 // Error handling middleware
+app.use(errorHandlerMiddleware)
 app.use(notFound)
 
 
