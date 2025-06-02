@@ -8,6 +8,7 @@ import prRoutes from "./routes/prRoutes.js"
 import { notFound } from "./middlewares/notFound.js";
 import { authMiddleware } from "./middlewares/auth.js";
 import { createAllTables } from "./data/createAllTables.js";
+import { verifyEmailMiddleware } from "./middlewares/verifyEmailMiddleware.js";
 
 
 dotenv.config();
@@ -21,8 +22,8 @@ app.use(cors());
 
 // Routes
 app.use('/api/v1/auth', authRoutes)
-app.use('/api/v1/workouts', authMiddleware, workoutRoutes)
-app.use('/api/v1/pr', authMiddleware, prRoutes)
+app.use('/api/v1/workouts', authMiddleware, verifyEmailMiddleware, workoutRoutes)
+app.use('/api/v1/pr', authMiddleware, verifyEmailMiddleware, prRoutes)
 
 // Error handling middleware
 app.use(notFound)

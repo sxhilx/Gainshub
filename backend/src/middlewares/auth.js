@@ -1,5 +1,5 @@
 import { UnauthenticatedError } from "../errors/index.js"
-import { verifyToken } from "../utils/jwt.js"
+import { verifyAuthToken } from "../utils/jwt.js"
 
 export const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization
@@ -11,7 +11,7 @@ export const authMiddleware = async (req, res, next) => {
     const token = authHeader.split(' ')[1] // after spliting looking for the second value (the token)
 
     try {
-        const decode = await verifyToken(token)
+        const decode = await verifyAuthToken(token)
         
         const { userId, name } = decode
         
