@@ -17,7 +17,7 @@ export const workoutSchema = Joi.object({
 
 export const prSchema = Joi.object({
     exerciseName: Joi.string().min(2).required(),
-    weight: Joi.number().required(),
+    weight: Joi.number().min(1).required(),
 })
 
 export const validateInput = (schema) => (req, res, next) => {
