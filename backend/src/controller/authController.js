@@ -27,3 +27,11 @@ export const resendVerificationToken = async (req, res) => {
     const resend = resendVerificationToken(email);
     res.StatusCodes(StatusCodes.OK).send(resend)
 }
+
+// export const googleLogin = (req,res) => {
+
+// }
+
+// export const googleRegister = (req, res) => {
+
+// }

@@ -81,3 +81,26 @@ export const resendVerificationToken = async (email) => {
    
 }
 
+export const googleAuthService = async ({email, fullname}) => {
+
+    console.log(email);
+    console.log(fullname);
+    
+
+    const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
+    let user = result.rows[0]
+
+    if(!user){
+        const password = Date.now().toString();
+        const hashedPassword = await hashPassword(password);
+
+        const createUser = await pool.query("INSERT INTO users (fullname, email, password, is_verified) VALUES ($1, $2, $3, $4) RETURNING *", [fullname, email, hashedPassword, true])
+        
+        user = createUser.rows[0]
+    }
+
+    const token = createAuthToken({userId: user.id, fullname: user.fullname})
+
+    return {token, user}
+
+}

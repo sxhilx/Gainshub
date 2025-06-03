@@ -1,4 +1,5 @@
 import Joi from "joi"
+import { BadRequestError } from "../errors/index.js"
 
 export const userSchema = Joi.object({
     fullname: Joi.string().min(3).required(),
@@ -25,7 +26,8 @@ export const validateInput = (schema) => (req, res, next) => {
 
     if(error){
         const details = error.details.map((err) => err.message)
-        return res.status(400).json({msg: details})
+        throw new BadRequestError(details)
     }
+
     next()
 }

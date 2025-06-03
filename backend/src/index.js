@@ -11,6 +11,8 @@ import { createAllTables } from "./data/createAllTables.js";
 import { verifyEmailMiddleware } from "./middlewares/verifyEmailMiddleware.js";
 import rateLimiter from "express-rate-limit"
 import { errorHandlerMiddleware } from "./middlewares/errorHandlerMiddleware.js";
+import passport from "passport";
+import './utils/passport.js'
 
 
 dotenv.config();
@@ -26,6 +28,8 @@ app.use(rateLimiter({
     limit: 100,
     message: 'Too many auth requests from this IP. Try again later.'
 }))
+
+app.use(passport.initialize());
 
 // Routes
 app.use('/api/v1/auth', authRoutes)
