@@ -15,7 +15,7 @@ export const addPrService = async (userId, exerciseName, weight) => {
     return result.rows[0];
 }
 
-export const getPrService = async (prId, userId) => {
+export const getPrService = async (prId, userId) => {   
     const result = await pool.query("SELECT * FROM prs WHERE id=$1 AND user_id=$2", [prId, userId])
 
     if (result.rows.length === 0) {
@@ -47,5 +47,5 @@ export const deletePrService = async (prId, userId) => {
         throw new BadRequestError("PR not found");
     }
 
-    return "PR deleted successfully";
+    return {message: "PR deleted successfully"};
 }

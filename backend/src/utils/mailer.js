@@ -18,7 +18,30 @@ export const sendVerificationEmail = async(to, token) => {
         from: `"GainsHub" <${process.env.SMTP_SENDER}>`,
         to,
         subject: "Verify your GainsHub account",
-        html: `<p>Click the link to verify your email: <a href="${link}">${link}</a></p>`,
+        html: `
+            <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <h2 style="color: #2d7ff9;">Welcome to GainsHub!</h2>
+                <p>Thanks for signing up. Please verify your email address to activate your account:</p>
+                <p>
+                <a href="${link}" style="
+                    display: inline-block;
+                    background-color: #2d7ff9;
+                    color: #fff;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border-radius: 6px;
+                    font-weight: bold;
+                ">
+                    Verify Email
+                </a>
+                </p>
+                <p>If the button doesn't work, copy and paste this link into your browser:</p>
+                <p style="word-break: break-all;">
+                <a href="${link}" style="color: #2d7ff9;">${link}</a>
+                </p>
+                <p>Thanks,<br/>The GainsHub Team</p>
+            </div>
+            `,
         });
         console.log("Email Sent");
     
@@ -27,3 +50,21 @@ export const sendVerificationEmail = async(to, token) => {
         
     }
 };
+
+export const sendResetPasswordEmail = async(to, token) => {
+    const link = `${process.env.CLIENT_URL}/reset-password?token=${token}`;
+
+    try {
+        await transporter.sendMail({
+        from: `"GainsHub" <${process.env.SMTP_SENDER}>`,
+        to,
+        subject: "Password Reset Request",
+        html: `<a href="${link}">Click here to reset your password</a>`,
+        });
+        console.log("Email Sent");
+    
+    } catch (error) {
+        console.log("Error while sending the email", error);
+        
+    }
+}

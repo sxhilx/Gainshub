@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { loginService, registerService, verifyEmailService } from "../models/authModel.js";
+import { forgotPasswordService, loginService, registerService, resendVerificationTokenService, resetPasswordService, verifyEmailService } from "../models/authModel.js";
 
 export const login = async(req, res) => {
     const {email, password} = req.body;
@@ -16,22 +16,28 @@ export const register = async(req, res) => {
 }
 
 export const verifyEmail = async(req, res) => {
-    const {token} = req.query;
+    const { token } = req.query;
     const verify = await verifyEmailService(token);
 
-    res.status(StatusCodes.OK).send(verify)
+    res.status(StatusCodes.OK).json(verify)
 }
 
 export const resendVerificationToken = async (req, res) => {
     const {email} = req.body;
-    const resend = resendVerificationToken(email);
-    res.StatusCodes(StatusCodes.OK).send(resend)
+    console.log(email);
+    
+    const resend = await resendVerificationTokenService(email);
+    res.status(StatusCodes.OK).json(resend)
 }
 
-// export const googleLogin = (req,res) => {
+export const forgotPassword = async(req, res) => {
+    const {email} = req.body;
+    const reset = await forgotPasswordService(email)
+    res.status(StatusCodes.OK).json(reset)
+}
 
-// }
-
-// export const googleRegister = (req, res) => {
-
-// }
+export const resetPassword = async (req, res) => {
+    const {token, newPassword} = req.body
+    const reset = await resetPasswordService(token, newPassword)
+    res.status(StatusCodes.OK).json(reset)
+}

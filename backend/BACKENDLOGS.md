@@ -82,3 +82,22 @@
 - Set up a Rate Limiter to limit user request
   - 100 requests in 15 mins
 - Implemented it using express-late-limit library
+
+### Google sign-in using passport.js
+- Implemented google sign-in using `passport.js` lib.
+- Had to implement two new routes for google sign-in, `/google` and `/google/callback`.
+- For now storing a random string for password when the user sign-in using google
+
+### New route to group workouts by weeks
+- Implemented a new workout route, `/by-weeks` to group all the workouts by weeks, reducing frontend complexity
+- A service modle and a controller set up to manage the functionality of this new route
+
+### Forgot-Password and Reset-Password routes set up
+- Implemented two new routes to allow user to change their password
+
+### Error-testing complete
+- Tested all the routes for any potential errors 
+
+
+## Future goals
+- Implement facebook login

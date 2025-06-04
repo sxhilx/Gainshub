@@ -23,10 +23,11 @@ const port = process.env.PORT || 3000
 // Middlewares
 app.use(express.json());
 app.use(cors());
+
 app.use(rateLimiter({
     windowMs: 15*60*1000,
-    limit: 100,
-    message: 'Too many auth requests from this IP. Try again later.'
+    max: 100,
+    message: 'Too many requests from this IP. Try again later.'
 }))
 
 app.use(passport.initialize());

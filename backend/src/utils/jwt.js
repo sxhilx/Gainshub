@@ -16,3 +16,11 @@ export const createEmailToken = (payload) => {
 export const verifyEmailToken = async (token) => {
     return jwt.verify(token, process.env.JWT_EMAIL_SECRET)
 }
+
+export const createResetPasswordToken = (payload) => {
+    return jwt.sign(payload, process.env.JWT_PASSWORD_SECRET, {expiresIn: process.env.JWT_PASSWORD_LIFETIME})
+}
+
+export const verifyResetPasswordToken = async (token) => {
+    return jwt.verify(token, process.env.JWT_PASSWORD_SECRET)
+}

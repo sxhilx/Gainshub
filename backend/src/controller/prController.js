@@ -15,7 +15,8 @@ export const addPr = async (req, res, next) => {
 }
 
 export const getPr = async (req, res, next) => {
-    const {userId} = req.user 
+    const { userId } = req.user 
+    console.log(userId);    
     const {id:prId} = req.params
     const pr = await getPrService(prId, userId)
     res.status(StatusCodes.OK).json({pr})
@@ -33,5 +34,5 @@ export const deletePr = async (req, res, next) => {
     const {userId} = req.user
     const {id:prId} = req.params
     const pr = await deletePrService(prId, userId)
-    res.status(StatusCodes.OK).send(pr)
+    res.status(StatusCodes.OK).json(pr)
 }

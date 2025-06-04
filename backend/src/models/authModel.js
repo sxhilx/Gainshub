@@ -1,8 +1,8 @@
 import pool from "../config/db.js"
 import { BadRequestError, UnauthenticatedError } from "../errors/index.js"
 import { comparePassword, hashPassword } from "../utils/hash.js";
-import { createAuthToken, createEmailToken, verifyEmailToken } from "../utils/jwt.js";
-import { sendVerificationEmail } from "../utils/mailer.js";
+import { createAuthToken, createEmailToken, createResetPasswordToken, verifyEmailToken, verifyResetPasswordToken } from "../utils/jwt.js";
+import { sendResetPasswordEmail, sendVerificationEmail } from "../utils/mailer.js";
 
 export const loginService = async (email, password) => {
     const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
@@ -56,14 +56,14 @@ export const verifyEmailService = async(token) => {
         const {userId} = decode
 
         await pool.query("UPDATE users SET is_verified=true WHERE id=$1", [userId])
-        return "Email Verified"
+        return {message: "Email Verified"}
     } catch (error) {
         throw new UnauthenticatedError('Verification token incorrect or expired')
     }
     
 }
 
-export const resendVerificationToken = async (email) => {
+export const resendVerificationTokenService = async (email) => {
     const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
     const user = result.rows[0]
 
@@ -77,8 +77,7 @@ export const resendVerificationToken = async (email) => {
 
    const emailToken = createEmailToken({userId: user.id}) 
    await sendVerificationEmail(email, emailToken)
-   return "Verification Email Sent"
-   
+   return {message: "Verification email sent"} 
 }
 
 export const googleAuthService = async ({email, fullname}) => {
@@ -102,5 +101,35 @@ export const googleAuthService = async ({email, fullname}) => {
     const token = createAuthToken({userId: user.id, fullname: user.fullname})
 
     return {token, user}
+}
 
+export const forgotPasswordService = async (email) => {
+    const result = await pool.query("SELECT * FROM users WHERE email=$1 ", [email])
+    const user = result.rows[0]
+
+    if(user.length === 0){
+        throw new BadRequestError("Email not registered")
+    }
+
+    const resetPasswordToken = createResetPasswordToken({userId: user.id})
+
+    await sendResetPasswordEmail(email, resetPasswordToken)
+    return {message: "Password Reset email sent"}
+}
+
+export const resetPasswordService = async (token, newPassword) => {
+        const decode = await verifyResetPasswordToken(token);
+
+        if(!decode){
+            throw new UnauthenticatedError('Verification token incorrect or expired')
+        }
+
+        const {userId} = decode;
+
+        const hashedPassword = await hashPassword(newPassword)
+        console.log(hashedPassword);
+        
+        await pool.query("UPDATE users SET password = $1 WHERE id = $2", [hashedPassword, userId])
+        
+        return {message: "Password updated"}   
 }

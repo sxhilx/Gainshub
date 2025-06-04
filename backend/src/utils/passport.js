@@ -17,8 +17,8 @@ passport.use(new GoogleStrategy({
         return done(new Error("Email not found in Google profile"), null);
         }
 
-        const { user } = await googleAuthService({ email, fullname });
-        done(null, user);
+        const { token, user } = await googleAuthService({ email, fullname });
+        done(null, {user, token});
     } catch (error) {
         console.log(error, "ERROR");        
         done(error, null)
