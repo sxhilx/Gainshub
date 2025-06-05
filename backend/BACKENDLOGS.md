@@ -1,6 +1,4 @@
-# GainHub Journey
-
-## Backend
+# GymScribe Backend Journey
 
 ### Project Initialization
 - Created the initial project folder structure
