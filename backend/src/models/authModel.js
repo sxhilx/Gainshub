@@ -107,8 +107,12 @@ export const forgotPasswordService = async (email) => {
     const result = await pool.query("SELECT * FROM users WHERE email=$1 ", [email])
     const user = result.rows[0]
 
-    if(user.length === 0){
-        throw new BadRequestError("Email not registered")
+    if(!user){
+        throw new BadRequestError("Email not found")
+    }
+
+    if(!user.is_verified){
+        throw new BadRequestError("Email is not verified")
     }
 
     const resetPasswordToken = createResetPasswordToken({userId: user.id})
@@ -118,18 +122,17 @@ export const forgotPasswordService = async (email) => {
 }
 
 export const resetPasswordService = async (token, newPassword) => {
-        const decode = await verifyResetPasswordToken(token);
+    const decode = await verifyResetPasswordToken(token);
 
-        if(!decode){
-            throw new UnauthenticatedError('Verification token incorrect or expired')
-        }
+    if(!decode){
+        throw new UnauthenticatedError('Verification token incorrect or expired')
+    }
 
-        const {userId} = decode;
-
-        const hashedPassword = await hashPassword(newPassword)
-        console.log(hashedPassword);
-        
-        await pool.query("UPDATE users SET password = $1 WHERE id = $2", [hashedPassword, userId])
-        
-        return {message: "Password updated"}   
+    const {userId} = decode;
+  
+    const hashedPassword = await hashPassword(newPassword)
+    
+    await pool.query("UPDATE users SET password = $1 WHERE id = $2", [hashedPassword, userId])
+    
+    return {message: "Password updated"}   
 }

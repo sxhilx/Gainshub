@@ -15,7 +15,7 @@ const router = express.Router();
 
 
 
-router.get('/login', login)
+router.post('/login', login)
 router.post('/register', validateInput(userSchema), register)
 
 router.get('/verify-email', verifyEmail)
@@ -33,9 +33,10 @@ router.get('/google',
 router.get('/google/callback',
     passport.authenticate('google', {session: false, failureRedirect: '/login' }),
     function(req, res) {
-        const {user, token} = req.user
-        // Successful authentication, redirect home.
-        res.status(StatusCodes.OK).json({authToken: token, userId: user.id})}
+        const {token} = req.user
+        // Successful authentication, redirect.
+        res.redirect(`http://localhost:5173/auth-redirect?token=${token}`)
+    }
 )
 
 export default router;

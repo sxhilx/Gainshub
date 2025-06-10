@@ -22,7 +22,18 @@ const port = process.env.PORT || 3000
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = [
+  'http://localhost:5173', // for local development
+  "https://accounts.google.com/" 
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // Allows cookies and authorization headers
+}));
 
 app.use(rateLimiter({
     windowMs: 15*60*1000,
