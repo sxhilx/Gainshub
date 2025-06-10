@@ -5,12 +5,14 @@ import {Navbar, Footer, ScrollRestoration} from './index'
 const Layout = () => {
   return (
     <div>
+      
         <ScrollRestoration/>
 
         {/*Navbar.jsx or Sidebar.jsx*/}
         <Navbar/>
 
             <main>
+
                 <Outlet/>
             </main>
 
