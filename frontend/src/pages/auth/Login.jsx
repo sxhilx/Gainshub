@@ -1,8 +1,7 @@
 import React, {useActionState, useState} from 'react'
 import { GoogleIcon, GymModel} from '../../assets'
 import {EyeOffIcon, EyeIcon} from 'lucide-react'
-import Button from '../../components/Button'
-import { FormField } from '../../components'
+import { FormField, Button } from '../../components'
 import { Link, useNavigate } from 'react-router-dom'
 import { googleLogin, loginUser } from '../../controllers/auth'
 
@@ -62,7 +61,7 @@ const Login = () => {
 
                     <Button
                     disabled={isPending}
-                    className='w-full bg-gradient-to-br from-[#27c2ff] to-[#0d76de] font-medium mt-3 cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] duration-200'
+                    className='w-full bg-gradient-to-br from-[#27c2ff] to-[#0d76de] font-medium mt-3 cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200'
                     >
                      {isPending ? "Loading..." : "Sign in"}    
                     </Button>      

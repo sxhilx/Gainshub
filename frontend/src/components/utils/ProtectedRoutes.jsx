@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, Outlet } from 'react-router-dom'
 
 const ProtectedRoutes = () => {
@@ -7,11 +7,13 @@ const ProtectedRoutes = () => {
 
     const token = localStorage.getItem("token")
 
-    if(!token){
+    useEffect(() => {
+      if(!token){
         navigate('/login')
-    }
+      }
+    }, [navigate, token])
 
-  return <Outlet/>
+  return token ? <Outlet/> : null
   
 }
 

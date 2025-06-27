@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FeatureCard, Footer, Navbar } from '../../components'
+import { Button, FeatureCard} from '../../components'
 import { DumbbellIcon, MoveRightIcon, TrophyIcon } from 'lucide-react'
 import { DashboardImage } from '../../assets'
 
@@ -9,8 +9,6 @@ const LandingPage = () => {
 
       {/*Glow Effect*/}
       <div class="absolute top-0 z-[-2] h-full w-full bg-slate-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_30%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-
-      <Navbar/>
 
         <section className='px-2'>
             <div className='max-w-6xl mx-auto flex flex-col justify-center items-center mt-25 text-center'>    
@@ -26,7 +24,7 @@ const LandingPage = () => {
                 </div>
 
                 <div className='mt-2'>
-                  <span className='text-slate-400 tracking-wide'>GymScribe helps you log workouts and track personal records in a beautiful way.</span>
+                  <span className='text-slate-400 tracking-wide'>Gainshub helps you log workouts and track personal records in a beautiful way.</span>
                 </div>
 
                 <div className='mt-5'>
@@ -60,8 +58,6 @@ const LandingPage = () => {
 
         </div>
       </section>
-
-      <Footer/>
 
     </main>
   )

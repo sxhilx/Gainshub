@@ -6,7 +6,9 @@ const FormField = ({
   name,
   onChange,
   onClick,
-  className = 'text-white text-sm font-medium',
+  className,
+  labelClassName = 'text-white text-sm font-medium',
+  inputClassName,
   value,
   placeholder,
   error,
@@ -15,16 +17,16 @@ const FormField = ({
 
 }) => {
   return (
-    <div>
+    <div className={`${className} flex flex-col`}>
         <label 
         htmlFor={name}
-        className={`${className} focus:ring-0 focus:outline-none`}>{label}</label>
+        className={` ${labelClassName} focus:ring-0 focus:outline-none`}>{label}</label>
         
         <div className='relative'>
           <input 
           type={type}
           name={name} 
-          className={`border border-slate-700 w-full h-10 mb-4 mt-2 text-slate-400 p-4 rounded-md focus:ring-1 focus:ring-blue-500 focus:outline-none `}
+          className={`${inputClassName} border border-slate-700 w-full h-10 mb-4 mt-2 text-slate-400 p-4 rounded-md focus:ring-1 focus:ring-blue-500 focus:outline-none text-`}
           value={value}
           onChange={onChange}
           placeholder={placeholder} 

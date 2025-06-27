@@ -1,19 +1,25 @@
-import ProtectedRoutes from "./ProtectedRoutes";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import ScrollRestoration from "./ScrollRestoration";
-import Layout from "./Layout";
-import Button from "./Button";
-import FeatureCard from "./FeatureCard";
-import FormField from "./FormField";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
+import Navbar from "./layout/Navbar";
+import Footer from "./layout/Footer";
+import ScrollRestoration from "./utils/ScrollRestoration";
+import PublicLayout from "./layout/PublicLayout";
+import ProtectedLayout from "./layout/ProtectedaLayout";
+import Button from "./common/Button";
+import FeatureCard from "./common/FeatureCard";
+import FormField from "./forms/FormField";
+import SideBar from "./layout/SideBar";
+import WorkoutCard from "./features/WorkoutCard";
 
 export{
     ProtectedRoutes,
     Footer,
     Navbar,
     ScrollRestoration,
-    Layout,
+    PublicLayout,
+    ProtectedLayout,
     Button,
     FeatureCard,
-    FormField
+    FormField,
+    SideBar,
+    WorkoutCard,
 }

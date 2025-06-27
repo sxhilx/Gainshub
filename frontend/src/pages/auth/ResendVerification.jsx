@@ -1,6 +1,5 @@
 import React, {useActionState, useState} from 'react'
-import Button from '../../components/Button'
-import { FormField } from '../../components'
+import { FormField, Button } from '../../components'
 import { resendVerificationEmail } from '../../controllers/auth'
 
 const ResendVerification = () => {    

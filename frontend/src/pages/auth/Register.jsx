@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import { GoogleIcon, GymModel } from '../../assets'
 import {EyeOffIcon, EyeIcon} from 'lucide-react'
-import Button from '../../components/Button'
-import { FormField } from '../../components'
+import { FormField, Button } from '../../components'
 import { Link } from 'react-router-dom'
 import { useActionState } from 'react'
 import { googleLogin, registerUser } from '../../controllers/auth'
@@ -37,7 +36,7 @@ const Register = () => {
         <div className='w-full lg:w-1/2 h-screen p-4'>            
             <div className=' mx-auto max-w-lg my-6 p-5 rounded-xl bg-gradient-to-tl from-slate-900 to-slate-950 shadow'>
                 <h1 className='text-white font-bold text-center text-2xl'>Create your account</h1>
-                <p className='text-slate-400 text-center'>Start your fitness journey today with GymScribe</p>
+                <p className='text-slate-400 text-center'>Start your fitness journey today with Gainshub</p>
 
                 <form action={submitAction} className='my-5 relative'>
 

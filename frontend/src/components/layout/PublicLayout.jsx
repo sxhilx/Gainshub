@@ -1,8 +1,8 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import {Navbar, Footer, ScrollRestoration} from './index'
+import {Navbar, Footer, ScrollRestoration} from '../'
 
-const Layout = () => {
+const PublicLayout = () => {
   return (
     <div>
       
@@ -23,4 +23,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default PublicLayout

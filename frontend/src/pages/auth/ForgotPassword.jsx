@@ -1,6 +1,5 @@
 import React, {useActionState, useState} from 'react'
-import Button from '../../components/Button'
-import { FormField } from '../../components'
+import { FormField, Button } from '../../components'
 import { Link } from 'react-router-dom'
 import { forgotPassword } from '../../controllers/auth'
 import { ArrowLeftIcon } from 'lucide-react'

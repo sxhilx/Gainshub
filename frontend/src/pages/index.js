@@ -6,6 +6,8 @@ import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
 import ResendVerification from "./auth/ResendVerification";
 import VerifyEmail from "./auth/VerifyEmail";
+import Dashboard from "./dashboard/Dashboard";
+import AddWorkout from "./dashboard/AddWorkout";
 
 export{
     LandingPage,
@@ -15,5 +17,7 @@ export{
     ForgotPassword,
     ResetPassword,
     ResendVerification,
-    VerifyEmail
+    VerifyEmail,
+    Dashboard,
+    AddWorkout
 }

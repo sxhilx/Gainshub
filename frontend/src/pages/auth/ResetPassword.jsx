@@ -1,6 +1,5 @@
 import React, {useActionState, useState} from 'react'
-import Button from '../../components/Button'
-import { FormField } from '../../components'
+import { FormField, Button } from '../../components'
 import { resetPassword } from '../../controllers/auth'
 import { useLocation, useNavigate } from 'react-router-dom'
 

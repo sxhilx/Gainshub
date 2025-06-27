@@ -1,5 +1,5 @@
 import React from 'react'
-import { Logo } from '../assets'
+import { Logo } from '../../assets'
 
 const Footer = () => {
   return (
@@ -8,8 +8,8 @@ const Footer = () => {
       
       <div className='flex flex-col lg:col-span-2 lg:w-[70%]'>
         <a href="/" className='flex items-center'>
-            <img src={Logo} alt="GymScribe" className=' w-12 md:w-14 md:h-14'/>
-            <span className='text-xl md:text-2xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>GymScribe</span>
+            <img src={Logo} alt="Gainshub" className=' w-12 md:w-14 md:h-14'/>
+            <span className='text-xl md:text-2xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>
         </a>
         <div className='mt-2'>
           <span className='text-slate-400 text-md'>
@@ -38,7 +38,7 @@ const Footer = () => {
     <div className='flex flex-col justify-center items-center'>
       <hr className='text-slate-700 w-[90%] mt-5'/>
       <div className='py-10 text-slate-400'>
-        © 2024 GymScribe. All rights reserved.
+        © 2024 Gainshub. All rights reserved.
       </div>
     </div>
     </div>

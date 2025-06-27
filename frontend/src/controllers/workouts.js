@@ -5,7 +5,8 @@ export const getAllWorkouts = async () => {
         const response = await API.get('/workouts/')
         return response.data
     } catch (error) {
-        console.error("Error while fetching workouts", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -14,7 +15,8 @@ export const getWorkoutsByWeeks = async () => {
         const response = await API.get('/workouts/by-weeks')
         return response.data
     } catch (error) {
-        console.error("Error while fetching workouts by weeks", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -23,7 +25,8 @@ export const addWorkout = async (userData) => {
         const response = await API.post('/workouts/', userData)
         return response.data
     } catch (error) {
-        console.error("Error while adding workouts", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -32,7 +35,8 @@ export const getWorkout = async (workoutId) => {
         const response = await API.get(`/workouts/${workoutId}`)
         return response.data
     } catch (error) {
-        console.error("Error while getting workout", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;    
     }
 }
 
@@ -41,7 +45,8 @@ export const editWorkout = async (workoutId, userData) => {
         const response = await API.patch(`/workouts/${workoutId}`, userData)
         return response.data
     } catch (error) {
-        console.error("Error while editing workouts", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -50,6 +55,7 @@ export const deleteWorkout = async (workoutId) => {
         const response = await API.delete(`/workouts/${workoutId}`)
         return response.data
     } catch (error) {
-        console.error("Error while deleting workouts", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
