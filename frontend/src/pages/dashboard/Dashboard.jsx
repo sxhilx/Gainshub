@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useActionState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, WorkoutCard } from '../../components'
 import { DumbbellIcon, PlusIcon } from 'lucide-react'
-import { getWorkoutsByWeeks, deleteWorkout, getWorkout } from '../../controllers/workouts'
+import { getWorkoutsByWeeks, deleteWorkout } from '../../controllers/workouts'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
-  const [logWorkout, setLogWorkout] = useState(false)
+
+  const navigate = useNavigate()
   const [workoutsByWeek, setWorkoutsByWeek] = useState({})
   
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState()
   const [error, setError] = useState()
 
-  useEffect(() => {
-    document.body.style.overflow = logWorkout ? 'hidden' : 'auto'
-  }, [logWorkout])
-
-  
 
   const fetchLatestWeek = async() => {
     setLoading(true)
@@ -52,20 +49,7 @@ const Dashboard = () => {
   }
 
   const handleOnAddExercise = async (id) => {
-    setLoading(true)
-    try {
-      const res = await getWorkout(id)   
-      setFormData({
-        week: res.workout.training_week,
-        movementtype: res.workout.movement_type,
-        exercise: "", weight: "", sets: "", reps: ""
-      })
-      setLogWorkout(true)
-      setLoading(false)
-    } catch (error) {
-      setError(error.response?.data?.msg || "Failed to fetch workout");
-      setLoading(false);
-    }
+    navigate(`/add-workout/${id}`)
   }
 
   return (

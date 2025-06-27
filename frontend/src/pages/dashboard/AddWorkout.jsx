@@ -1,8 +1,12 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { FormField, Button } from '../../components'
-import { addWorkout } from '../../controllers/workouts';
+import { addWorkout, getWorkout } from '../../controllers/workouts';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const AddWorkout = () => {
+
+    const navigate = useNavigate()
+    const {id} = useParams()
 
     const [formData, setFormData] = useState({
         week: "",
@@ -15,6 +19,28 @@ const AddWorkout = () => {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState()
     const [error, setError] = useState()
+
+    useEffect(() => {
+        if(id){
+        async function fetchWorkoutDetails(){
+            setLoading(true)
+            try {
+                const res = await getWorkout(id)   
+                setFormData({
+                week: res.workout.training_week,
+                movementtype: res.workout.movement_type,
+                exercise: "", weight: "", sets: "", reps: ""
+                })
+                setLoading(false)
+            } catch (error) {
+                setError(error.response?.data?.msg || "Failed to fetch workout");
+                setLoading(false);
+            }
+        }
+
+        fetchWorkoutDetails()
+    }
+    }, [])
 
     const handleAddWorkout = async (e) => {
         e.preventDefault()
@@ -31,11 +57,11 @@ const AddWorkout = () => {
           setSuccess("Workout Added successfully")
           setFormData({ week: "", movementtype: "", exercise: "", weight: "", sets: "", reps: "" });
           setTimeout(() => {
-            setLogWorkout(false)
             setSuccess("")
+            navigate('/dashboard')
           }, 1500)
-          fetchWorkouts()
         } catch (error) {
+            console.log(error);            
           setError(error.response?.data?.msg || "Failed to fetch workouts");
           setLoading(false);
         }

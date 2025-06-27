@@ -26,9 +26,9 @@ const SideBar = () => {
                     </Link>
                 </li>
                  <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
-                    <Link to={'/add-workout'} className='flex items-center gap-2'>
+                    <Link to={'/workouts'} className='flex items-center gap-2'>
                         <Activity size={16}/>
-                        Add Workout
+                        Workouts
                     </Link>
                 </li>
                  <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>

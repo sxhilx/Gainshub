@@ -1,6 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import { PublicLayout, ProtectedLayout, ProtectedRoutes, SideBar } from "./components"
-import { AddWorkout, AuthRedirect, Dashboard, ForgotPassword, LandingPage, Login, Register, ResendVerification, ResetPassword, VerifyEmail } from "./pages"
+import { PublicLayout, ProtectedLayout, ProtectedRoutes } from "./components"
+import { AddWorkout, AuthRedirect, Dashboard, ForgotPassword, LandingPage, Login, Register, ResendVerification, ResetPassword, VerifyEmail, Workouts } from "./pages"
 
 
 const router = createBrowserRouter([
@@ -52,8 +52,12 @@ const router = createBrowserRouter([
             element: <Dashboard/>
           },
           {
-            path: '/add-workout',
+            path: '/add-workout/:id?',
             element: <AddWorkout/>
+          },
+          {
+            path: '/workouts',
+            element: <Workouts/>
           },
           {
             path: '/edit-workout/:workoutId',

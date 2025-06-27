@@ -32,7 +32,7 @@ const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd}) => {
           </div>
       ))}
         <div className='flex justify-end p-2'>
-          <Button 
+          <Button
           className='bg-slate-700 text-white text-sm hover:bg-slate-600 px-4 py-1 rounded cursor-pointer transition'
           onClick={() => onAdd(workouts[0].workoutId)}
           >
