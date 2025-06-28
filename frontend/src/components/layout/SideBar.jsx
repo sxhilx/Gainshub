@@ -1,44 +1,74 @@
 import React from 'react'
 import {Logo} from "../../assets"
-import {Link} from "react-router-dom"
-import { Activity, HomeIcon, LogOutIcon, TrophyIcon } from "lucide-react"
+import {Link, useNavigate} from "react-router-dom"
+import { Activity, Columns2Icon, HomeIcon, LogOutIcon, TrophyIcon } from "lucide-react"
+import Button from '../common/Button'
 
-const SideBar = () => {
+const SideBar = ({ isopen, toggleSidebar}) => {
+    const navigate = useNavigate()
+    const handleNavClick = () => {
+        if(window.innerWidth < 768) {
+            toggleSidebar()
+        }
+    }
+
+    const handleLogOut = () => {
+        localStorage.removeItem("token")
+        navigate('/login')
+    }
   return (
-    <div className='w-full lg:w-[18%] lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col'>
-        <div className='flex items-center p-2'>
-            <img src={Logo} alt="Gainshub" className='w-16'/>
-            <div className='flex flex-col'> 
-                <span className='text-xl md:text-xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>
-                <span className='text-xs text-slate-400'>Fitness Tracker</span>
+    <div className={`w-full md:max-w-3xs lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col fixed top-0 left-0 z-50 overflow-hidden transition-transform ${isopen ? '-translate-x-0' : '-translate-x-full'}`}>
+        <div className='flex items-center justify-between p-2'>
+            <div className='flex items-center'>
+                <img src={Logo} alt="Gainshub" className='w-12'/>
+                <div className='flex flex-col'> 
+                    <span className='text-xl md:text-2xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>                    
+                </div>
             </div>
+            <Button className='cursor-pointer' onClick={toggleSidebar}>
+                <Columns2Icon 
+                className='text-[#27c2ff]'
+                size={26}/>
+            </Button>
         </div>
 
-        <hr className='text-gray-700 mt-3'/>
+        
 
-        <div className='mt-5 p-2'>
-            <h2 className='text-sm text-slate-400 mb-2'>Navigation</h2>
-            <ul className='text-white '>
+        <div className='mt-2 p-2'>
+            <h2 className='text-sm text-slate-400 mb-2 '>Navigation</h2>
+            <ul className='text-white p-2 md:p-0'>
                 <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
-                    <Link to={'/dashboard'} className='flex items-center gap-2'>
+                    <Link 
+                    to={'/dashboard'} 
+                    className='flex items-center gap-2'
+                    onClick={handleNavClick}>
                         <HomeIcon size={16}/>
                         Dashboard
                     </Link>
                 </li>
                  <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
-                    <Link to={'/workouts'} className='flex items-center gap-2'>
+                    <Link 
+                    to={'/workouts'} 
+                    className='flex items-center gap-2' 
+                    onClick={handleNavClick}>
                         <Activity size={16}/>
                         Workouts
                     </Link>
                 </li>
                  <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
-                    <Link to={'/add-pr'} className='flex items-center gap-2'>
+                    <Link 
+                    to={'/add-pr'} 
+                    className='flex items-center gap-2'
+                    onClick={handleNavClick}>
                         <TrophyIcon size={16}/>
                         Add PR
                     </Link>
                 </li>
                  <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
-                    <Link to={'/logout'} className='flex items-center gap-2'>
+                    <Link 
+                    to={'/logout'} 
+                    className='flex items-center gap-2'
+                    onClick={handleLogOut}>
                         <LogOutIcon size={16}/>
                         Logout
                     </Link>

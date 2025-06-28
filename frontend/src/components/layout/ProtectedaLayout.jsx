@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { SideBar, ScrollRestoration} from '../index'
+import { SideBar, ScrollRestoration, ProtectedNavbar} from '../index'
 
 const ProtectedLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev)
+  }
   return (
     <div>
       
         <ScrollRestoration/>
 
         {/* Sidebar.jsx*/}
-        <div className='sm:hidden lg:flex  min-h-screen'>
+        <div className='lg:flex  min-h-screen'>
            
-          <SideBar/>
+          <SideBar 
+          className={`${isSidebarOpen ? 'hidden' : 'block'}`}
+          isopen={isSidebarOpen}  toggleSidebar={toggleSidebar}/>
 
-          <main className='flex-1 p-4'>
-            <Outlet/>
-          </main>
+          <div className='flex-col w-full'>
+            <ProtectedNavbar toggleSidebar={toggleSidebar}/>
+
+            <main className={`flex-1 p-4 flex-grow overflow-auto ${isSidebarOpen ? "lg:pl-64" : "pl-0"}`}>
+              <Outlet/>
+            </main>
+
+          </div>
 
         </div>
 

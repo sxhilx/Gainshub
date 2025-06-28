@@ -9,6 +9,7 @@ import FeatureCard from "./common/FeatureCard";
 import FormField from "./forms/FormField";
 import SideBar from "./layout/SideBar";
 import WorkoutCard from "./features/WorkoutCard";
+import ProtectedNavbar from "./layout/ProtectedNavbar";
 
 export{
     ProtectedRoutes,
@@ -22,4 +23,5 @@ export{
     FormField,
     SideBar,
     WorkoutCard,
+    ProtectedNavbar
 }
