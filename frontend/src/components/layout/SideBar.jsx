@@ -5,8 +5,8 @@ import { Activity, HomeIcon, LogOutIcon, TrophyIcon } from "lucide-react"
 
 const SideBar = () => {
   return (
-    <div className='w-full lg:w-[20%] bg-neutral-800 min-h-screen flex flex-col p-2'>
-        <div className='flex items-center'>
+    <div className='w-full lg:w-[18%] lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col'>
+        <div className='flex items-center p-2'>
             <img src={Logo} alt="Gainshub" className='w-16'/>
             <div className='flex flex-col'> 
                 <span className='text-xl md:text-xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>
@@ -16,7 +16,7 @@ const SideBar = () => {
 
         <hr className='text-gray-700 mt-3'/>
 
-        <div className='mt-5'>
+        <div className='mt-5 p-2'>
             <h2 className='text-sm text-slate-400 mb-2'>Navigation</h2>
             <ul className='text-white '>
                 <li className='hover:bg-gray-400/10 hover:backdrop-blur-2xl w-full cursor-pointer transition duration-100 p-1 rounded'>
