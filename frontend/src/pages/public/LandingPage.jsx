@@ -13,7 +13,7 @@ const LandingPage = () => {
         <section className='px-2'>
             <div className='max-w-6xl mx-auto flex flex-col justify-center items-center mt-25 text-center'>    
 
-                <div className='text-5xl font-bold text-white'>
+                <div className='text-4xl md:text-5xl font-bold text-white'>
                   <span>Log Your 
                     <span className='text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text'> Workouts</span>.
                   </span><br />
@@ -36,7 +36,7 @@ const LandingPage = () => {
                   </Button>
                 </div>                
 
-                <div className='backdrop-blur-3xl bg-white/10 rounded-lg w-[75%] mt-10'>
+                <div className='backdrop-blur-3xl bg-white/10 rounded-lg w-full md:w-[75%] mt-10'>
                     <img src={DashboardImage} alt="Image" className='p-5 rounded-lg'/>
                 </div>
 
