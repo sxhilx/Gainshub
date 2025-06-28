@@ -17,7 +17,7 @@ const SideBar = ({ isopen, toggleSidebar}) => {
         navigate('/login')
     }
   return (
-    <div className={`w-full md:max-w-3xs lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col fixed top-0 left-0 z-50 overflow-hidden transition-transform ${isopen ? '-translate-x-0' : '-translate-x-full'}`}>
+    <div className={`w-full md:max-w-3xs lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col fixed top-0 left-0 z-50 overflow-hidden transition-transform ${isopen ? '-translate-x-0' : '-translate-x-full'} duration-150`}>
         <div className='flex items-center justify-between p-2'>
             <div className='flex items-center'>
                 <img src={Logo} alt="Gainshub" className='w-12'/>

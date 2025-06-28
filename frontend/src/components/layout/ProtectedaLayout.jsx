@@ -22,7 +22,7 @@ const ProtectedLayout = () => {
           <div className='flex-col w-full'>
             <ProtectedNavbar toggleSidebar={toggleSidebar}/>
 
-            <main className={`flex-1 p-4 flex-grow overflow-auto ${isSidebarOpen ? "lg:pl-64" : "pl-0"}`}>
+            <main className={`flex-1 flex-grow overflow-auto ${isSidebarOpen ? "md:pl-64" : "pl-0"}`}>
               <Outlet/>
             </main>
 

@@ -53,27 +53,26 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      
+      <div className="text-white max-w-7xl mx-auto flex flex-col p-4 lg:p-10 relative z-10">
 
-      {/* === MAIN DASHBOARD === */}
-      <div className="text-white max-w-6xl mx-auto flex flex-col p-10 relative z-10">
-        <div className="flex justify-between">
+        <div className=" space-y-4 md:flex flex-row justify-between items-center">
           <div>
             <h1 className="text-4xl font-bold">Dashboard</h1>
             <span className="text-slate-400">Ready to crush your fitness goals today?</span>
           </div>
 
-          <Button
-            to={'/add-workout'}
-            className="px-2 lg:px-4 font-medium text-xs lg:text-sm bg-gradient-to-tr from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200 flex gap-2 items-center"
-          >
-            <PlusIcon />
-            Log New Workout
-          </Button>
+          <div>
+            <Button
+              to={'/add-workout'}
+              className="px-2 lg:px-4 font-medium text-xs lg:text-sm bg-gradient-to-tr from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200 flex gap-2 items-center"
+            >
+              <PlusIcon />
+              Log New Workout
+            </Button>
+          </div>
         </div>
 
-        <div className="backdrop-blur-3xl bg-slate-400/10 my-10 p-4 rounded">
+        <div className="my-10 border p-4 md:p-5 rounded-lg border-slate-800 shadow">
           <span className="text-2xl font-semibold flex items-center gap-2">
             <DumbbellIcon size={24} className="text-[#27c2ff]" />
             Latest week
@@ -102,7 +101,6 @@ const Dashboard = () => {
           }
         </div>
       </div>
-    </>
   )
 }
 

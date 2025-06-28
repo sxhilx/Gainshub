@@ -68,7 +68,7 @@ const AddWorkout = () => {
     }
 
   return (
-    <div className='text-white max-w-6xl mx-auto flex flex-col p-10 space-y-5'>
+    <div className='text-white max-w-7xl mx-auto flex flex-col p-4 lg:p-10 space-y-5 my-2'>
         <div className=''>
             <h1 className="text-4xl font-bold text-white">Add Workout</h1>
             <span className="text-slate-400">Track and manage your workouts</span>
@@ -89,7 +89,7 @@ const AddWorkout = () => {
 
             <span className="text-2xl font-semibold">Log New Workout</span>
             <form onSubmit={handleAddWorkout} className="mt-4 w-full">
-                <div className="flex flex-wrap gap-5">
+                <div className="flex flex-col md:flex-row flex-wrap md:gap-5">
                 <FormField
                     value={formData.week}
                     onChange={(e) => setFormData((prev) => ({...prev, week: e.target.value}))}
@@ -113,7 +113,7 @@ const AddWorkout = () => {
                     defaultValue={''}
                 />
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-col md:flex-row flex-wrap md:gap-3">
                 <FormField
                     value={formData.exercise}
                     onChange={(e) => setFormData((prev) => ({...prev, exercise: e.target.value}))}
