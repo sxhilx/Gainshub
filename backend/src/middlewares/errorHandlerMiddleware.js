@@ -5,7 +5,7 @@ export const errorHandlerMiddleware = (err, req, res, next) => {
 
     let customError = {
         statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-        msg:err.message || 'Something went wrong tryn again later'
+        msg:err.message || 'Something went wrong try again later'
 
     }
 

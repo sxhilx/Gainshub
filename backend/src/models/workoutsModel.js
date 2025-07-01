@@ -8,38 +8,32 @@ export const getAllWorkoutsService = async (userId) => {
 
 export const getWorkoutsByWeeksService = async(userId) => {
    
-    const week = await pool.query("SELECT * from workouts WHERE user_id = $1", [userId])
-    
-    let groupByWeek = {}
-    let weeks = []
+    const {rows} = await pool.query('SELECT * FROM workouts WHERE user_id = $1 ORDER BY training_week DESC, created_at DESC', [userId])
 
-    if(week){
+    const groupByWeek = {}
 
-        for(let i = 0; i < week.rows.length; i++){
-            if(i === week.rows.length - 1 || week.rows[i].training_week != week.rows[i+1].training_week){
-                weeks.push(week.rows[i].training_week);
-            }
-        }        
-        
-        for (const weekNum of weeks){
-            const workouts = await pool.query("SELECT * FROM workouts WHERE training_week = $1", [weekNum])
-            groupByWeek[weekNum] = []
-            for(let i = 0; i < workouts.rows.length; i++){
-                groupByWeek[weekNum].push(
-                    {
-                        movementType: workouts.rows[i].movement_type,
-                        exerciseName: workouts.rows[i].exercise_name,
-                        weight: workouts.rows[i].weight,
-                        sets: workouts.rows[i].sets,
-                        reps: workouts.rows[i].reps
-                
-                    }
-                ) 
-            }
+    for(const workout of rows){
+        const week = workout.training_week
+
+        if(!groupByWeek[week]){
+            groupByWeek[week] = []
         }
+
+        groupByWeek[week].push({
+            workoutId: workout.id,
+            movementType: workout.movement_type,
+            exerciseName: workout.exercise_name,
+            weight: workout.weight,
+            sets: workout.sets,
+            reps: workout.reps,
+            created_at: workout.created_at,
+        })
     }
-    
-    return {groupByWeek, count: Object.keys(groupByWeek).length};
+
+    return {
+    groupByWeek,
+    count: Object.keys(groupByWeek).length,
+  };
 
 }
 

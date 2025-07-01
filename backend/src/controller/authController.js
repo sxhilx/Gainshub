@@ -18,7 +18,6 @@ export const register = async(req, res) => {
 export const verifyEmail = async(req, res) => {
     const { token } = req.query;
     const verify = await verifyEmailService(token);
-
     res.status(StatusCodes.OK).json(verify)
 }
 
