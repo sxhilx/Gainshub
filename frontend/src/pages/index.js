@@ -9,6 +9,7 @@ import VerifyEmail from "./auth/VerifyEmail";
 import Dashboard from "./dashboard/Dashboard";
 import AddWorkout from "./dashboard/AddWorkout";
 import Workouts from "./dashboard/Workouts";
+import AddPR from "./dashboard/AddPR";
 
 export{
     LandingPage,
@@ -21,5 +22,6 @@ export{
     VerifyEmail,
     Dashboard,
     AddWorkout,
-    Workouts
+    Workouts,
+    AddPR
 }

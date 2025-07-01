@@ -119,7 +119,7 @@ const Dashboard = () => {
          <div className="mb-10 border rounded-lg border-slate-800 shadow">
           <span className="text-2xl font-semibold flex items-center gap-2 m-3">
             <TrophyIcon size={24} className="text-yellow-600" />
-            Latest PRs
+            All PRs
           </span>
           {
             prs.map((pr, index) => (
@@ -128,7 +128,16 @@ const Dashboard = () => {
               </div>
             ))
           }
+
+          <hr className='text-slate-800'/>
+
+          <div className='flex justify-end mx-2 my-5'>
+            <Button 
+            to={'/add-pr'}
+            className='bg-slate-700 text-white text-sm hover:bg-slate-600 px-4 py-1 rounded cursor-pointer transition'>Add PR</Button>
+          </div>
         </div>
+        
       </div>
   )
 }

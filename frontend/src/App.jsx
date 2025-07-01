@@ -1,6 +1,6 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { PublicLayout, ProtectedLayout, ProtectedRoutes } from "./components"
-import { AddWorkout, AuthRedirect, Dashboard, ForgotPassword, LandingPage, Login, Register, ResendVerification, ResetPassword, VerifyEmail, Workouts } from "./pages"
+import { AddPR, AddWorkout, AuthRedirect, Dashboard, ForgotPassword, LandingPage, Login, Register, ResendVerification, ResetPassword, VerifyEmail, Workouts } from "./pages"
 
 
 const router = createBrowserRouter([
@@ -62,6 +62,10 @@ const router = createBrowserRouter([
           {
             path: '/edit-workout/:workoutId',
             element: <></>
+          },
+          {
+            path: '/add-pr',
+            element: <AddPR/>
           },
           {
             path: '/edit-pr/:prId',

@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../common/Button'
 
 const PRCard = ({exerciseName, weight, date}) => {
   return (
@@ -9,6 +10,8 @@ const PRCard = ({exerciseName, weight, date}) => {
             <span className='text-sm text-slate-400'>{date}</span>
         </div>
         <span className='font-semibold text-xl'>{weight}kg</span>
+      </div>
+      <div>
       </div>
     </div>
   )
