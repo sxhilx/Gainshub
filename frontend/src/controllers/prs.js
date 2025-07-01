@@ -22,7 +22,7 @@ export const addPr = async (userData) => {
 
 export const getPr = async (prId) => {
     try {
-        const response = await API.get(`/workouts/${prId}`)
+        const response = await API.get(`/pr/${prId}`)
         return response.data
     } catch (error) {
         console.error("Error: ", error.response?.data || error.message)
@@ -32,7 +32,7 @@ export const getPr = async (prId) => {
 
 export const editPr = async (prId, userData) => {
     try {
-        const response = await API.patch(`/workouts/${prId}`, userData)
+        const response = await API.patch(`/pr/${prId}`, userData)
         return response.data
     } catch (error) {
         console.error("Error: ", error.response?.data || error.message)
@@ -42,7 +42,7 @@ export const editPr = async (prId, userData) => {
 
 export const deletePr = async (prId) => {
     try {
-        const response = await API.delete(`/workouts/${prId}`)
+        const response = await API.delete(`/pr/${prId}`)
         return response.data
     } catch (error) {
         console.error("Error: ", error.response?.data || error.message)

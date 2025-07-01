@@ -3,7 +3,7 @@ import { Button, PRCard, WorkoutCard } from '../../components'
 import { DumbbellIcon, PlusIcon, TrophyIcon } from 'lucide-react'
 import { getWorkoutsByWeeks, deleteWorkout } from '../../controllers/workouts'
 import { useNavigate } from 'react-router-dom'
-import { getAllPrs } from '../../controllers/prs'
+import { deletePr, getAllPrs } from '../../controllers/prs'
 
 const Dashboard = () => {
 
@@ -51,7 +51,7 @@ const Dashboard = () => {
     fetchLatestPRs();
   }, [])
 
-  const handleOnDelete = async (id) => {
+  const handleOnWorkoutDelete = async (id) => {
     setLoading(true)
     try {
       await deleteWorkout(id)      
@@ -65,6 +65,22 @@ const Dashboard = () => {
 
   const handleOnAddExercise = async (id) => {
     navigate(`/add-workout/${id}`)
+  }
+
+  const handleDeletePR = async (id) => {    
+    setLoading(true)
+    try {
+      await deletePr(id)
+      fetchLatestPRs();
+      setLoading(false)
+    } catch (error) {
+      setError(error.response?.data?.msg || "Failed to delete PR");
+      setLoading(false);
+    }
+  }
+
+  const handleEditPR = (id) => {
+    navigate(`/pr-form/${id}`)
   }
 
   return (
@@ -106,7 +122,7 @@ const Dashboard = () => {
                 week={week}
                 workouts={workouts}
                 date={new Date(workouts[0]?.created_at).toLocaleDateString()}
-                onDelete={handleOnDelete}
+                onDelete={handleOnWorkoutDelete}
                 onAdd={handleOnAddExercise}
               />
             )
@@ -123,8 +139,14 @@ const Dashboard = () => {
           </span>
           {
             prs.map((pr, index) => (
-              <div>
-                <PRCard exerciseName={pr.exercise_name} weight={pr.weight} date={new Date(pr.created_at).toLocaleDateString()}/>
+              <div key={index}>
+                <PRCard 
+                id={pr.id}
+                exerciseName={pr.exercise_name} 
+                weight={pr.weight} 
+                date={new Date(pr.created_at).toLocaleDateString()}
+                onDelete={handleDeletePR}
+                onEdit={handleEditPR}/>
               </div>
             ))
           }
@@ -133,7 +155,7 @@ const Dashboard = () => {
 
           <div className='flex justify-end mx-2 my-5'>
             <Button 
-            to={'/add-pr'}
+            to={'/pr-form'}
             className='bg-slate-700 text-white text-sm hover:bg-slate-600 px-4 py-1 rounded cursor-pointer transition'>Add PR</Button>
           </div>
         </div>

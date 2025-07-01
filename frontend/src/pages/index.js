@@ -9,7 +9,7 @@ import VerifyEmail from "./auth/VerifyEmail";
 import Dashboard from "./dashboard/Dashboard";
 import AddWorkout from "./dashboard/AddWorkout";
 import Workouts from "./dashboard/Workouts";
-import AddPR from "./dashboard/AddPR";
+import PRForm from "./dashboard/PRForm";
 
 export{
     LandingPage,
@@ -23,5 +23,5 @@ export{
     Dashboard,
     AddWorkout,
     Workouts,
-    AddPR
+    PRForm
 }

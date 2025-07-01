@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Button, FormField } from '../../components'
-import { addPr } from '../../controllers/prs';
-import { useNavigate } from 'react-router-dom';
+import { addPr, getPr } from '../../controllers/prs';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddPR = () => {
+const PRForm = () => {
 
     const navigate = useNavigate()
+    const {id} = useParams();
+    const isEdit = Boolean(id)
     const [formData, setFormData] = useState({
         exerciseName: "",
         weight: ""
@@ -13,6 +15,30 @@ const AddPR = () => {
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState()
     const [error, setError] = useState()
+
+    useEffect(() => {
+        if(id){
+            const fetchPR = async() => {
+                setLoading(true)
+                try {
+                    const res = await getPr(id);
+                    const pr = res.pr;
+                    setLoading(false)
+                    setFormData({
+                        exerciseName: pr.exercise_name,
+                        weight: pr.weight
+                    }) 
+                    
+                } catch (error) {
+                    console.log(error);            
+                    setError(error.response?.data?.msg || "Failed to fetch PR");
+                    setLoading(false);
+                }
+            }
+
+            fetchPR();
+        }        
+    }, [])
 
     const handleAddPR = async (e) => {
         e.preventDefault()
@@ -37,6 +63,9 @@ const AddPR = () => {
     }
 
   return (
+    loading ? (
+        <div>Loading...</div>
+    ) : (
     <div className='text-white max-w-7xl mx-auto flex flex-col p-4 lg:p-10 space-y-5 my-2'>
         <div className=''>
             <h1 className="text-4xl font-bold text-white">Add PR</h1>
@@ -91,14 +120,15 @@ const AddPR = () => {
                     type="submit"
                     className="px-4 py-1 bg-gradient-to-br from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200"
                 >
-                    {loading ? "Adding Workout" : "Add"}
+                    {loading ? "Adding Workout" : (isEdit  ? "Edit" : "Add")}
                     
                 </Button>
                 </div>
             </form>
         </div>
     </div>
+    )
   )
 }
 
-export default AddPR
+export default PRForm
