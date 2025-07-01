@@ -5,20 +5,20 @@ import {Button} from '../index'
 const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd}) => { 
 
   return (
-    <div className='my-4 rounded border border-slate-800'>
+    <div className='my-4 rounded border-t border-slate-800'>
       <div className='rounded-full flex justify-between items-center p-3'>
           <span className='text-xl font-semibold'>Week {week}</span>
           <span className='text-slate-400 text-sm'>{date}</span>
       </div>
       <hr className='text-slate-600 w-full'/>
       {workouts.map((workout, index) => (
-          <div className='p-3 text-sm md:text-lg' key={index}>                      
+          <div className='p-3 text-xs md:text-lg' key={index}>                      
             <div className='flex gap-2 items-center justify-between px-1 font-semibold'>                        
               <div className='flex gap-2'>
-                <span className='min-w-16  text-center backdrop-blur-3xl bg-blue-300/20 py-1 px-3 rounded-full text-blue-400 text-xs'>{workout.movementType}</span>
-                <span className=''>{workout.exerciseName}</span>
+                <span className='min-w-12 md:min-w-16 flex justify-center items-center text-center backdrop-blur-3xl bg-blue-300/20 my-1 md:py-1 px-3 rounded-full text-blue-400 text-xs'>{workout.movementType}</span>
+                <span className='max-w-16 break-words'>{workout.exerciseName}</span>
               </div>
-              <div className='flex gap-6 text-slate-400 font-medium items-center'>                        
+              <div className='flex gap-3 md:gap-6 text-slate-400 font-medium items-center'>                        
                 <span className='min-w-[60px] text-right'>{workout.weight}</span>
                 <span className='min-w-[60px] text-right'>{workout.sets}x{workout.reps}</span>
 

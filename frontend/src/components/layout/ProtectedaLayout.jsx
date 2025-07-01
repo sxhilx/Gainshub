@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { SideBar, ScrollRestoration, ProtectedNavbar} from '../index'
 
 const ProtectedLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768)
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev)
   }

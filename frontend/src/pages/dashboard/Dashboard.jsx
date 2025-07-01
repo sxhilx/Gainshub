@@ -72,8 +72,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="my-10 border p-4 md:p-5 rounded-lg border-slate-800 shadow">
-          <span className="text-2xl font-semibold flex items-center gap-2">
+        <div className="my-10 border rounded-lg border-slate-800 shadow">
+          <span className="text-2xl font-semibold flex items-center gap-2 m-3">
             <DumbbellIcon size={24} className="text-[#27c2ff]" />
             Latest week
           </span>

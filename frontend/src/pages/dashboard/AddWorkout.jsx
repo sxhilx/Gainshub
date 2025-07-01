@@ -38,6 +38,8 @@ const AddWorkout = () => {
             }
         }
 
+        
+
         fetchWorkoutDetails()
     }
     }, [])
