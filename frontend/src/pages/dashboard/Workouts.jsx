@@ -32,6 +32,7 @@ const Workouts = () => {
   }, [])
 
   const handleOnDelete = async (id) => {
+    
     setLoading(true)
     try {
       await deleteWorkout(id)      
@@ -44,7 +45,11 @@ const Workouts = () => {
   }
 
   const handleOnAddExercise = async (id) => {
-    navigate(`/add-workout/${id}`)
+    navigate(`/workout-form/${id}`)
+  }
+
+  const handleOnEditExercise = async (workoutId) => {
+    navigate(`/workout-form/edit/${workoutId}`)
   }
 
   return (
@@ -57,7 +62,7 @@ const Workouts = () => {
           </div>
 
           <Button
-            to={'/add-workout'}
+            to={'/workout-form'}
             className="px-2 lg:px-4 font-medium text-xs lg:text-sm bg-gradient-to-tr from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200 flex gap-2 items-center"
           >
             <PlusIcon />
@@ -72,23 +77,21 @@ const Workouts = () => {
           </span>
           {
                  
-          Object.entries(workoutsByWeek).map(([week, workouts]) => {
-            if (!workouts || workouts.length === 0) {
-              return(
-                <p className="text-slate-400 italic m-5">No workouts available</p>
-              )
-            };
-            return(
-              <WorkoutCard
-                key={week}
-                week={week}
-                workouts={workouts}
-                date={new Date(workouts[0]?.created_at).toLocaleDateString()}
-                onDelete={handleOnDelete}
-                onAdd={handleOnAddExercise}
-              />
+            Object.entries(workoutsByWeek).length === 0 ? (
+              <p className="text-slate-400 italic m-5">No workouts available</p>
+            ) : (
+              Object.entries(workoutsByWeek).map(([week, workouts]) => (        
+                <WorkoutCard
+                  key={week}
+                  week={week}
+                  workouts={workouts}
+                  date={new Date(workouts[0]?.created_at).toLocaleDateString()}
+                  onDelete={handleOnDelete}
+                  onAdd={handleOnAddExercise}
+                  onEdit={handleOnEditExercise}
+                />
+              ))
             )
-          })
           
           
           }

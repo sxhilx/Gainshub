@@ -22,7 +22,6 @@ const Dashboard = () => {
       const res = await getWorkoutsByWeeks();   
       const group = res.groupByWeek
       const latestWeek = Math.max(...Object.keys(group).map(Number)).toString(); // return the latest week number
-      console.log(latestWeek);
       const latestWeeklyWorkouts = group[latestWeek]
       setWorkoutsByWeek({
         [latestWeek] : latestWeeklyWorkouts
@@ -98,7 +97,7 @@ const Dashboard = () => {
 
           <div>
             <Button
-              to={'/add-workout'}
+              to={'/workout-form'}
               className="px-2 lg:px-4 font-medium text-xs lg:text-sm bg-gradient-to-tr from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200 flex gap-2 items-center"
             >
               <PlusIcon />
@@ -117,7 +116,7 @@ const Dashboard = () => {
           Object.entries(workoutsByWeek).map(([week, workouts]) => {
             if (!workouts || workouts.length === 0) {
               return(
-                <p className="text-slate-400 italic m-5">No workouts available</p>
+                <p key={week} className="text-slate-400 italic m-5">No workouts available</p>
               )
             };
             return(
@@ -143,26 +142,23 @@ const Dashboard = () => {
             All PRs
           </span>
           {
-            prs.map((pr, index) => (
-              <div key={index}>
-                <PRCard 
-                id={pr.id}
-                exerciseName={pr.exercise_name} 
-                weight={pr.weight} 
-                date={new Date(pr.created_at).toLocaleDateString()}
-                onDelete={handleDeletePR}
-                onEdit={handleEditPR}/>
-              </div>
-            ))
+            prs.length > 0 ? (
+              prs.map((pr, index) => (
+                <div key={index}>
+                  <PRCard 
+                    id={pr.id}
+                    exerciseName={pr.exercise_name} 
+                    weight={pr.weight} 
+                    date={new Date(pr.created_at).toLocaleDateString()}
+                    onDelete={handleDeletePR}
+                    onEdit={handleEditPR}
+                  />
+                </div>
+              ))
+            ) : (
+              <p className="text-slate-400 italic m-5">No PRs available</p>
+            )
           }
-
-          <hr className='text-slate-800'/>
-
-          <div className='flex justify-end mx-2 my-5'>
-            <Button 
-            to={'/pr-form'}
-            className='bg-slate-700 text-white text-sm hover:bg-slate-600 px-4 py-1 rounded cursor-pointer transition'>Add PR</Button>
-          </div>
         </div>
         
       </div>
