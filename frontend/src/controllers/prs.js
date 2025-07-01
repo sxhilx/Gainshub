@@ -5,7 +5,8 @@ export const getAllPrs = async () => {
         const response = await API.get('/pr/')
         return response.data
     } catch (error) {
-        console.error("Error while fetching PRs", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -14,7 +15,8 @@ export const addPr = async (userData) => {
         const response = await API.post('/pr/', userData)
         return response.data
     } catch (error) {
-        console.error("Error while adding PR", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -23,7 +25,8 @@ export const getPr = async (prId) => {
         const response = await API.get(`/workouts/${prId}`)
         return response.data
     } catch (error) {
-        console.error("Error while getting PR", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -32,7 +35,8 @@ export const editPr = async (prId, userData) => {
         const response = await API.patch(`/workouts/${prId}`, userData)
         return response.data
     } catch (error) {
-        console.error("Error while editing PR", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }
 
@@ -41,6 +45,7 @@ export const deletePr = async (prId) => {
         const response = await API.delete(`/workouts/${prId}`)
         return response.data
     } catch (error) {
-        console.error("Error while deleting PR", error)
+        console.error("Error: ", error.response?.data || error.message)
+        throw error;
     }
 }

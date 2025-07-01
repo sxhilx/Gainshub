@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Button, WorkoutCard } from '../../components'
-import { DumbbellIcon, PlusIcon } from 'lucide-react'
+import { Button, PRCard, WorkoutCard } from '../../components'
+import { DumbbellIcon, PlusIcon, TrophyIcon } from 'lucide-react'
 import { getWorkoutsByWeeks, deleteWorkout } from '../../controllers/workouts'
 import { useNavigate } from 'react-router-dom'
+import { getAllPrs } from '../../controllers/prs'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
   const [workoutsByWeek, setWorkoutsByWeek] = useState({})
+  const [prs, setPrs] = useState([])
   
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState()
   const [error, setError] = useState()
 
 
-  const fetchLatestWeek = async() => {
+  const fetchLatestWorkout = async() => {
     setLoading(true)
     try {        
       const res = await getWorkoutsByWeeks();   
@@ -32,15 +34,28 @@ const Dashboard = () => {
     }
   }
 
+  const fetchLatestPRs = async () => {
+    setLoading(true)
+    try {
+      const res = await getAllPrs();
+      setPrs(res.prs);
+      setLoading(false)
+    } catch (error) {
+      setError(error.response?.data?.msg || "Failed to fetch PRs");
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    fetchLatestWeek();
+    fetchLatestWorkout();
+    fetchLatestPRs();
   }, [])
 
   const handleOnDelete = async (id) => {
     setLoading(true)
     try {
       await deleteWorkout(id)      
-      fetchLatestWeek()
+      fetchLatestWorkout()
       setLoading(false)
     } catch (error) {
       setError(error.response?.data?.msg || "Failed to delete workout");
@@ -75,7 +90,7 @@ const Dashboard = () => {
         <div className="my-10 border rounded-lg border-slate-800 shadow">
           <span className="text-2xl font-semibold flex items-center gap-2 m-3">
             <DumbbellIcon size={24} className="text-[#27c2ff]" />
-            Latest week
+            Latest Workout
           </span>
           {
           
@@ -98,6 +113,20 @@ const Dashboard = () => {
           })
           
           
+          }
+        </div>
+
+         <div className="mb-10 border rounded-lg border-slate-800 shadow">
+          <span className="text-2xl font-semibold flex items-center gap-2 m-3">
+            <TrophyIcon size={24} className="text-yellow-600" />
+            Latest PRs
+          </span>
+          {
+            prs.map((pr, index) => (
+              <div>
+                <PRCard exerciseName={pr.exercise_name} weight={pr.weight} date={new Date(pr.created_at).toLocaleDateString()}/>
+              </div>
+            ))
           }
         </div>
       </div>

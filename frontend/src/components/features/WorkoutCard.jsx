@@ -16,7 +16,7 @@ const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd}) => {
             <div className='flex gap-2 items-center justify-between px-1 font-semibold'>                        
               <div className='flex gap-2'>
                 <span className='min-w-12 md:min-w-16 flex justify-center items-center text-center backdrop-blur-3xl bg-blue-300/20 my-1 md:py-1 px-3 rounded-full text-blue-400 text-xs'>{workout.movementType}</span>
-                <span className='max-w-16 break-words'>{workout.exerciseName}</span>
+                <span className='max-w-16 md:max-w-3xs break-words'>{workout.exerciseName}</span>
               </div>
               <div className='flex gap-3 md:gap-6 text-slate-400 font-medium items-center'>                        
                 <span className='min-w-[60px] text-right'>{workout.weight}</span>
