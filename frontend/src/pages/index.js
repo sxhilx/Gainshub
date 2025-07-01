@@ -7,7 +7,7 @@ import ResetPassword from "./auth/ResetPassword";
 import ResendVerification from "./auth/ResendVerification";
 import VerifyEmail from "./auth/VerifyEmail";
 import Dashboard from "./dashboard/Dashboard";
-import AddWorkout from "./dashboard/AddWorkout";
+import WorkoutForm from "./dashboard/WorkoutForm";
 import Workouts from "./dashboard/Workouts";
 import PRForm from "./dashboard/PRForm";
 
@@ -21,7 +21,7 @@ export{
     ResendVerification,
     VerifyEmail,
     Dashboard,
-    AddWorkout,
+    WorkoutForm,
     Workouts,
     PRForm
 }

@@ -1,8 +1,7 @@
-import { DeleteIcon, SquarePen, Trash2Icon, TrashIcon } from 'lucide-react'
-import React, { useState } from 'react'
+import { SquarePen, Trash2Icon } from 'lucide-react'
 import {Button} from '../index'
 
-const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd}) => { 
+const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd, onEdit}) => { 
 
   return (
     <div className='my-4 rounded border-t border-slate-800'>
@@ -28,7 +27,9 @@ const WorkoutCard = ({week, date, workouts = [], onDelete, onAdd}) => {
               </div>     
 
               <div className='flex gap-3 md:gap-6 text-slate-400 font-medium items-center'>
-                <Button className='text-[#27c2ff] cursor-pointer'>
+                <Button 
+                onClick={() => onEdit(workout.workoutId)}
+                className='text-[#27c2ff] cursor-pointer'>
                   <SquarePen size={16}/>
                 </Button>
 

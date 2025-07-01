@@ -120,7 +120,7 @@ const PRForm = () => {
                     type="submit"
                     className="px-4 py-1 bg-gradient-to-br from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200"
                 >
-                    {loading ? "Adding Workout" : (isEdit  ? "Edit" : "Add")}
+                    {loading ? "Adding PR" : (isEdit  ? "Edit" : "Add")}
                     
                 </Button>
                 </div>

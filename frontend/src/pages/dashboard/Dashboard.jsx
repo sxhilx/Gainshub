@@ -64,7 +64,11 @@ const Dashboard = () => {
   }
 
   const handleOnAddExercise = async (id) => {
-    navigate(`/add-workout/${id}`)
+    navigate(`/workout-form/${id}`)
+  }
+
+  const handleOnEditExercise = async (workoutId) => {
+    navigate(`/workout-form/edit/${workoutId}`)
   }
 
   const handleDeletePR = async (id) => {    
@@ -124,6 +128,7 @@ const Dashboard = () => {
                 date={new Date(workouts[0]?.created_at).toLocaleDateString()}
                 onDelete={handleOnWorkoutDelete}
                 onAdd={handleOnAddExercise}
+                onEdit={handleOnEditExercise}
               />
             )
           })

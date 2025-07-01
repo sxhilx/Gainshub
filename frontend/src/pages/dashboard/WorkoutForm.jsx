@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import { FormField, Button } from '../../components'
-import { addWorkout, getWorkout } from '../../controllers/workouts';
+import { addWorkout, editWorkout, getWorkout } from '../../controllers/workouts';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const AddWorkout = () => {
+const WorkoutForm = () => {
 
     const navigate = useNavigate()
-    const {id} = useParams()
+    const {id, workoutId} = useParams()
+    const isEdit = Boolean(workoutId)
 
     const [formData, setFormData] = useState({
         week: "",
@@ -21,34 +22,55 @@ const AddWorkout = () => {
     const [error, setError] = useState()
 
     useEffect(() => {
-        if(id){
+        if(id || workoutId){
         async function fetchWorkoutDetails(){
             setLoading(true)
             try {
-                const res = await getWorkout(id)   
-                setFormData({
-                week: res.workout.training_week,
-                movementtype: res.workout.movement_type,
-                exercise: "", weight: "", sets: "", reps: ""
-                })
+                const res = await getWorkout(id || workoutId)   
+                if(workoutId){
+                    setFormData({
+                    week: res.workout.training_week,
+                    movementtype: res.workout.movement_type,
+                    exercise: res.workout.exercise_name, 
+                    weight: res.workout.weight, 
+                    sets: res.workout.sets, 
+                    reps: res.workout.reps
+                    })
+                }else{
+                    setFormData({
+                    week: res.workout.training_week,
+                    movementtype: res.workout.movement_type,
+                    exercise: "", weight: "", sets: "", reps: ""
+                    })
+                }
                 setLoading(false)
             } catch (error) {
                 setError(error.response?.data?.msg || "Failed to fetch workout");
                 setLoading(false);
             }
-        }
-
-        
+        }       
 
         fetchWorkoutDetails()
     }
     }, [])
 
-    const handleAddWorkout = async (e) => {
+    const handleWorkoutChange = async (e) => {
         e.preventDefault()
         setLoading(true)
         try {
-          await addWorkout({
+          if(workoutId){
+            await editWorkout(workoutId, {
+                trainingWeek: formData.week,
+                movementType: formData.movementtype,
+                exerciseName: formData.exercise,
+                weight: formData.weight,
+                sets: formData.sets,
+                reps: formData.reps
+                
+            })
+            setSuccess("Workout Edited successfully")
+          }else{
+            await addWorkout({
             trainingWeek: formData.week,
             movementType: formData.movementtype,
             exerciseName: formData.exercise,
@@ -56,7 +78,9 @@ const AddWorkout = () => {
             sets: formData.sets,
             reps: formData.reps
           })
-          setSuccess("Workout Added successfully")
+           setSuccess("Workout Added successfully")
+          }
+         
           setFormData({ week: "", movementtype: "", exercise: "", weight: "", sets: "", reps: "" });
           setTimeout(() => {
             setSuccess("")
@@ -64,7 +88,7 @@ const AddWorkout = () => {
           }, 1500)
         } catch (error) {
             console.log(error);            
-          setError(error.response?.data?.msg || "Failed to fetch workouts");
+          setError(error.response?.data?.msg || "Failed to change workouts");
           setLoading(false);
         }
     }
@@ -72,7 +96,9 @@ const AddWorkout = () => {
   return (
     <div className='text-white max-w-7xl mx-auto flex flex-col p-4 lg:p-10 space-y-5 my-2'>
         <div className=''>
-            <h1 className="text-4xl font-bold text-white">Add Workout</h1>
+            <h1 className="text-4xl font-bold text-white">
+                {isEdit ? "Edit Workout" : "Add Workout"}
+            </h1>
             <span className="text-slate-400">Track and manage your workouts</span>
         </div>
         <div className="bg-gradient-to-tl from-slate-900 to-slate-950 text-slate-200 w-full p-5 rounded-lg border border-slate-600">
@@ -90,7 +116,7 @@ const AddWorkout = () => {
             )}
 
             <span className="text-2xl font-semibold">Log New Workout</span>
-            <form onSubmit={handleAddWorkout} className="mt-4 w-full">
+            <form onSubmit={handleWorkoutChange} className="mt-4 w-full">
                 <div className="flex flex-col md:flex-row flex-wrap md:gap-5">
                 <FormField
                     value={formData.week}
@@ -164,7 +190,7 @@ const AddWorkout = () => {
                     type="submit"
                     className="px-4 py-1 bg-gradient-to-br from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200"
                 >
-                    {loading ? "Adding Workout" : "Add"}
+                    {loading ? "Adding Workout" : (isEdit  ? "Edit" : "Add")}
                 </Button>
                 </div>
             </form>
@@ -173,4 +199,4 @@ const AddWorkout = () => {
   )
 }
 
-export default AddWorkout
+export default WorkoutForm
