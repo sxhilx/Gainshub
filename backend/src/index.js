@@ -25,7 +25,8 @@ app.use(express.json());
 
 const allowedOrigins = [
   'http://localhost:5173', // for local development
-  "https://accounts.google.com/" 
+  "https://accounts.google.com/",
+  "https://gainshub.vercel.app" 
 ];
 
 app.use(cors({
