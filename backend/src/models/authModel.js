@@ -89,6 +89,11 @@ export const googleAuthService = async ({email, fullname}) => {
     const result = await pool.query("SELECT * FROM users WHERE email=$1", [email])
     let user = result.rows[0]
 
+    if(user && !user.is_verified){
+        await pool.query("UPDATE users SET is_verified=$1 WHERE email=$2", [true, email]);
+        user.is_verified = true;
+    }
+
     if(!user){
         const password = Date.now().toString();
         const hashedPassword = await hashPassword(password);
