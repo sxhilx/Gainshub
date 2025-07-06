@@ -63,5 +63,5 @@ export const resetPassword = async (userData) => {
 }
 
 export const googleLogin = () => {
-    window.location.href = 'http://localhost:3000/api/v1/auth/google'
+    window.location.href = 'https://gainshub.onrender.com/api/v1/auth/google'
 }
