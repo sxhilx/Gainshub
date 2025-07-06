@@ -122,7 +122,7 @@ const Dashboard = () => {
             return(
               <WorkoutCard
                 key={week}
-                week={week}
+                week={week} 
                 workouts={workouts}
                 date={new Date(workouts[0]?.created_at).toLocaleDateString()}
                 onDelete={handleOnWorkoutDelete}

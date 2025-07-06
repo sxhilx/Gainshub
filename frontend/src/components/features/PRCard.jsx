@@ -15,7 +15,7 @@ const PRCard = ({exerciseName, weight, date, id, onDelete, onEdit}) => {
             <span className='font-semibold text-xl'>{weight}kg</span>
         </div>
 
-        <div className='flex items-center justify-end  gap-3 md:gap-8'>
+        <div className='flex items-center justify-end  gap-3 md:gap-6'>
             <Button onClick={() => onEdit(id)}>
                 <SquarePen className='text-[#27c2ff] cursor-pointer' size={16}/>
             </Button>

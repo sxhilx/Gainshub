@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Button, FormField } from '../../components'
-import { addPr, getPr } from '../../controllers/prs';
+import { addPr, getPr, editPr } from '../../controllers/prs';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const PRForm = () => {
@@ -40,25 +40,44 @@ const PRForm = () => {
         }        
     }, [])
 
+    const updatePR = async (id, data) => {
+        await editPr(id, data)
+    }
+
     const handleAddPR = async (e) => {
         e.preventDefault()
         setLoading(true)
         try {
-            const res = await addPr({
+            if(isEdit){
+                await updatePR(id, {
                 "exerciseName": formData.exerciseName,
                 "weight": formData.weight
-            })
-            setSuccess("PR Added successfully")
-            setFormData({ exerciseName: "", weight: "" });
-            setLoading(false)
-          setTimeout(() => {
-            setSuccess("")
-            navigate('/dashboard')
-          }, 1500)
+                })
+                setSuccess("PR Edited successfully")
+                setFormData({ exerciseName: "", weight: "" });
+                setLoading(false)
+                setTimeout(() => {
+                    setSuccess("")
+                    navigate('/dashboard')
+                }, 1500)
+            }else{
+                 await addPr({
+                "exerciseName": formData.exerciseName,
+                "weight": formData.weight
+                })
+                setSuccess("PR Added successfully")
+                setFormData({ exerciseName: "", weight: "" });
+                setLoading(false)
+                setTimeout(() => {
+                    setSuccess("")
+                    navigate('/dashboard')
+                }, 1500)
+            }
+           
         } catch (error) {
             console.log(error);            
-          setError(error.response?.data?.msg || "Failed to fetch workouts");
-          setLoading(false);
+            setError(error.response?.data?.msg || "Unexpected Error occured");
+            setLoading(false);
         }
     }
 
