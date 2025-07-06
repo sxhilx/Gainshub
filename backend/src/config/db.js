@@ -7,11 +7,19 @@ const { Pool } = pkg;
 
 
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
+
+    // docker postgre instance
+    // user: process.env.DB_USER,
+    // host: process.env.DB_HOST,
+    // database: process.env.DB,
+    // password: process.env.DB_PASSWORD,
+    // port: process.env.DB_PORT
+
+    // render instance
+    connectionString: process.env.DB_URL,
+    ssl: {
+        rejectUnauthorized: false, // required for Render
+    },
 })
 
 pool.on("connect", () => {
