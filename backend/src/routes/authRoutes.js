@@ -35,7 +35,7 @@ router.get('/google/callback',
     function(req, res) {
         const {token} = req.user
         // Successful authentication, redirect.
-        res.redirect(`http://localhost:5173/auth-redirect?token=${token}`)
+        res.redirect(`https://gainshub.vercel.app/auth-redirect?token=${token}`)
     }
 )
 
