@@ -35,11 +35,11 @@ app.use(cors({
   credentials: true // Allows cookies and authorization headers
 }));
 
-// app.use(rateLimiter({
-//     windowMs: 15*60*1000,
-//     max: 100,
-//     message: 'Too many requests from this IP. Try again later.'
-// }))
+app.use(rateLimiter({
+    windowMs: 15*60*1000,
+    max: 100,
+    message: 'Too many requests from this IP. Try again later.'
+}))
 
 app.use(passport.initialize());
 
@@ -57,10 +57,9 @@ app.use(notFound)
 createAllTables();
 
 
-// test route
+// Default route
 app.get('/', async(req, res) => {
-    const result = await pool.query("SELECT current_database()");
-    res.send(`The current database name is: ${result.rows[0].current_database}`)
+    res.send(`Welcome to GainsHub API`)
 })
 
 
