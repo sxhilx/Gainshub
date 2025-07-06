@@ -8,7 +8,8 @@ export const createUsersTable = async () => {
                                 fullname VARCHAR(20) NOT NULL,
                                 email VARCHAR(50) UNIQUE NOT NULL,
                                 password TEXT NOT NULL,
-                                created_at TIMESTAMP DEFAULT NOW()
+                                created_at TIMESTAMP DEFAULT NOW(),
+                                is_verified BOOLEAN DEFAULT false
                             );`;
     
         await pool.query(queryText);
