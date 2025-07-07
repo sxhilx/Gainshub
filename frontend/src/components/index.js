@@ -11,6 +11,8 @@ import SideBar from "./layout/SideBar";
 import WorkoutCard from "./features/WorkoutCard";
 import ProtectedNavbar from "./layout/ProtectedNavbar";
 import PRCard from "./features/PRCard";
+import WorkoutCardSkeleton from "./common/WorkoutCardSkeleton";
+import PRCardSkeleton from "./common/PRCardSkeleton";
 
 export{
     ProtectedRoutes,
@@ -25,5 +27,7 @@ export{
     SideBar,
     WorkoutCard,
     ProtectedNavbar,
-    PRCard
+    PRCard,
+    WorkoutCardSkeleton,
+    PRCardSkeleton
 }

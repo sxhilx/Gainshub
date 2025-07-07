@@ -13,26 +13,27 @@ const PRForm = () => {
         weight: ""
     });
     const [loading, setLoading] = useState(false)
+    const [formLoading, setFormLoading] = useState(false)
     const [success, setSuccess] = useState()
     const [error, setError] = useState()
 
     useEffect(() => {
         if(id){
             const fetchPR = async() => {
-                setLoading(true)
+                setFormLoading(true)
                 try {
                     const res = await getPr(id);
-                    const pr = res.pr;
-                    setLoading(false)
+                    const pr = res.pr;                    
                     setFormData({
                         exerciseName: pr.exercise_name,
                         weight: pr.weight
                     }) 
+                    setFormLoading(false)
                     
                 } catch (error) {
                     console.log(error);            
                     setError(error.response?.data?.msg || "Failed to fetch PR");
-                    setLoading(false);
+                    setFormLoading(false)
                 }
             }
 
@@ -82,9 +83,6 @@ const PRForm = () => {
     }
 
   return (
-    loading ? (
-        <div>Loading...</div>
-    ) : (
     <div className='text-white max-w-7xl mx-auto flex flex-col p-4 lg:p-10 space-y-5 my-2'>
         <div className=''>
             <h1 className="text-4xl font-bold text-white">Add PR</h1>
@@ -105,49 +103,75 @@ const PRForm = () => {
             )}
 
             <span className="text-2xl font-semibold">Log New PR</span>
-            <form onSubmit={handleAddPR} className="mt-4 w-full">
-                <div className="flex flex-col md:flex-row flex-wrap md:gap-5">
-                <FormField
-                    value={formData.exerciseName}
-                    onChange={(e) => setFormData((prev) => ({...prev, exerciseName: e.target.value}))}
-                    label="Exercise"
-                    name='exercise_name'
-                    type="text"
-                    className="flex-1"
-                    labelClassName="text-sm"
-                    placeholder="eg. Squats"
-                />
-                <FormField
-                    value={formData.weight}
-                    onChange={(e) => setFormData((prev) => ({...prev, weight: e.target.value}))}
-                    label="Weight (kg)"
-                    name="weight"
-                    type="number"
-                    className="flex-1"
-                    labelClassName="text-sm"
-                    placeholder="eg. 100"
-                />
-                </div>
 
-                <div className="mt-4 flex justify-end gap-3">
+            {
+                formLoading ? (
+                    <div className="animate-pulse space-y-4 mt-4">
+                        {/* Exercise field */}
+                        <div className="flex flex-col md:flex-row md:gap-5">
+                        <div className="flex-1 space-y-2">
+                            <div className="h-4 w-24 bg-slate-700 rounded skeleton" />
+                            <div className="h-10 bg-slate-700 rounded skeleton" />
+                        </div>
+                        
+                        {/* Weight field */}
+                        <div className="flex-1 space-y-2 mt-4 md:mt-0">
+                            <div className="h-4 w-24 bg-slate-700 rounded skeleton" />
+                            <div className="h-10 bg-slate-700 rounded skeleton" />
+                        </div>
+                        </div>
 
-                <Button
-                    onClick={() => {
-                        setError('')
-                        setSuccess('')
-                    }}
-                    type="submit"
-                    className="px-4 py-1 bg-gradient-to-br from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200"
-                >
-                    {loading ? "Adding PR" : (isEdit  ? "Edit" : "Add")}
-                    
-                </Button>
-                </div>
-            </form>
+                        {/* Submit Button */}
+                        <div className="flex justify-end mt-4">
+                        <div className="h-10 w-24 bg-slate-700 rounded skeleton" />
+                        </div>
+                    </div>
+                ) : (
+                    <form onSubmit={handleAddPR} className="mt-4 w-full">
+                        <div className="flex flex-col md:flex-row flex-wrap md:gap-5">
+                        <FormField
+                            value={formData.exerciseName}
+                            onChange={(e) => setFormData((prev) => ({...prev, exerciseName: e.target.value}))}
+                            label="Exercise"
+                            name='exercise_name'
+                            type="text"
+                            className="flex-1"
+                            labelClassName="text-sm"
+                            placeholder="eg. Squats"
+                        />
+                        <FormField
+                            value={formData.weight}
+                            onChange={(e) => setFormData((prev) => ({...prev, weight: e.target.value}))}
+                            label="Weight (kg)"
+                            name="weight"
+                            type="number"
+                            className="flex-1"
+                            labelClassName="text-sm"
+                            placeholder="eg. 100"
+                        />
+                        </div>
+
+                        <div className="mt-4 flex justify-end gap-3">
+
+                        <Button
+                            onClick={() => {
+                                setError('')
+                                setSuccess('')
+                            }}
+                            type="submit"
+                            className="px-4 py-1 bg-gradient-to-br from-[#27c2ff] to-[#0d76de] text-black cursor-pointer hover:from-[#0d76de] hover:to-[#27c2ff] transition duration-200"
+                        >
+                            {loading ? <span class="loading loading-dots loading-sm"></span> : (isEdit  ? "Edit" : "Add")}
+                            
+                        </Button>
+                        </div>
+                    </form>
+                )
+            }
+           
         </div>
     </div>
     )
-  )
 }
 
 export default PRForm

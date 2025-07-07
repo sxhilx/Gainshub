@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Button, WorkoutCard } from '../../components'
+import { Button, WorkoutCard, WorkoutCardSkeleton } from '../../components'
 import { Activity, PlusIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { getWorkoutsByWeeks, deleteWorkout } from '../../controllers/workouts'
@@ -76,24 +76,25 @@ const Workouts = () => {
             All workouts
           </span>
           {
-                 
-            Object.entries(workoutsByWeek).length === 0 ? (
-              <p className="text-slate-400 italic m-5">No workouts available</p>
+            loading ? (
+              <WorkoutCardSkeleton/>
             ) : (
-              Object.entries(workoutsByWeek).map(([week, workouts]) => (        
-                <WorkoutCard
-                  key={week}
-                  week={week}
-                  workouts={workouts}
-                  date={new Date(workouts[0]?.created_at).toLocaleDateString()}
-                  onDelete={handleOnDelete}
-                  onAdd={handleOnAddExercise}
-                  onEdit={handleOnEditExercise}
-                />
-              ))
-            )
-          
-          
+              Object.entries(workoutsByWeek).length === 0 ? (
+                <p className="text-slate-400 italic m-5">No workouts available</p>
+              ) : (
+                Object.entries(workoutsByWeek).map(([week, workouts]) => (        
+                  <WorkoutCard
+                    key={week}
+                    week={week}
+                    workouts={workouts}
+                    date={new Date(workouts[0]?.created_at).toLocaleDateString()}
+                    onDelete={handleOnDelete}
+                    onAdd={handleOnAddExercise}
+                    onEdit={handleOnEditExercise}
+                  />
+                ))
+              )
+            )          
           }
         </div>
     
