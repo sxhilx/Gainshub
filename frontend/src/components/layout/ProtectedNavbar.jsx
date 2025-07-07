@@ -1,8 +1,7 @@
-import React from 'react'
 import Button from '../common/Button'
 import { Columns2Icon } from 'lucide-react'
 
-const ProtectedNavbar = ({toggleSidebar, toggleTheme}) => {
+const ProtectedNavbar = ({toggleSidebar, toggleTheme, theme}) => {
   return (
     <div className='border-b border-b-slate-700 flex justify-between items-center'>
 
@@ -18,11 +17,11 @@ const ProtectedNavbar = ({toggleSidebar, toggleTheme}) => {
             
         </div>
 
-        <div className='text-slate-400 px-5'>
+        <div className='text-[#27c2ff] px-5'>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
-            <input type="checkbox" className="theme-controller" value="synthwave" onClick={toggleTheme}/>
-
+              <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme}/>
+            
             {/* sun icon */}
             <svg
               className="swap-off h-8 w-8 fill-current"

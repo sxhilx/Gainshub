@@ -11,7 +11,7 @@ const PublicLayout = () => {
         {/*Navbar.jsx or Sidebar.jsx*/}
         <Navbar/>
 
-            <main>
+            <main className=''>
 
                 <Outlet/>
             </main>

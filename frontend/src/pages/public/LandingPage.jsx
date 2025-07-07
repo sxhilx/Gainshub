@@ -8,7 +8,9 @@ const LandingPage = () => {
     <main className=''>
 
       {/*Glow Effect*/}
-      <div class="absolute top-0 z-[-2] h-full w-full bg-slate-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_30%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+      <div class="absolute top-0 z-[-2] h-full w-full bg-[radial-gradient(ellipse_80%_80%_at_50%_30%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
+        
+      </div>
 
         <section className='px-2'>
             <div className='max-w-6xl mx-auto flex flex-col justify-center items-center mt-25 text-center'>    
@@ -55,7 +57,6 @@ const LandingPage = () => {
           <FeatureCard title={'Workout Tracking'} Icon={DumbbellIcon} description={'Log and track your workouts with detailed exercise breakdowns and progress monitoring.'}/>
 
           <FeatureCard title={'Personal Records'} Icon={TrophyIcon} description={'Keep track of your PRs and celebrate your achievements as you reach new milestones.'}/>
-
         </div>
       </section>
 
