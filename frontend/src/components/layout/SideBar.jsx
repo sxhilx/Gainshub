@@ -19,8 +19,8 @@ const SideBar = ({ isopen, toggleSidebar}) => {
   return (
     <div className={`w-full md:max-w-3xs lg:border-r border-slate-700 bg-neutral-900 min-h-screen flex flex-col fixed top-0 left-0 z-50 overflow-hidden transition-transform ${isopen ? '-translate-x-0' : '-translate-x-full'} duration-150`}>
         <div className='flex items-center justify-between p-2'>
-            <div className='flex items-center'>
-                <img src={Logo} alt="Gainshub" className='w-12'/>
+            <div className='flex items-center gap-2'>
+                <img src={Logo} alt="Gainshub" className='w-10'/>
                 <div className='flex flex-col'> 
                     <span className='text-xl md:text-2xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>                    
                 </div>

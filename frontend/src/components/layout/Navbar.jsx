@@ -9,7 +9,7 @@ const Navbar = () => {
 
           <div className='flex items-center ml-2'>
               <a href="/" className='flex items-center gap-1'>
-                  <img src={Logo} alt="Gainshub" className=' w-10 md:w-14 md:h-14'/>
+                  <img src={Logo} alt="Gainshub" className=' w-8 md:w-10'/>
                   <span className='text-xl md:text-2xl font-bold text-transparent bg-gradient-to-br from-[#27c2ff] to-[#0d76de] bg-clip-text '>Gainshub</span>
               </a>
           </div>
